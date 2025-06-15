@@ -15,7 +15,7 @@ if (local_web_list_md5 && local_web_list){
 // 通过前端服务获取json
 else {
     $.ajaxSettings.async = false;
-    $.getJSON("static/site/js/web.v12.json", function (data) {
+    $.getJSON("static/site/js/web.v12.1.json", function (data) {
         web_list = data;
         localStorage.setItem('web_list', JSON.stringify(data));
         localStorage.setItem('web_list_md5', JSON.stringify('2020-01-01 00:00:00'));
@@ -31,10 +31,12 @@ for (i in web_list) {
         web_list_html += `<div id="web_8_30" class="col-md-4 web-grid web_8 is_star" data-toggle="modal" data-target="#exampleModal"><span style="cursor:pointer"><div data-toggle="popover" data-html="true" data-content="良心到难以置信的网站推荐" class="services-inner-box web-single clearfix" ontouchstart=""><span class="star iconfont">&#xe639;</span><h2>LKs网页推荐站</h2><p><span class="web-kind" style="margin-right:0">实用</span></p></div></span></div>`;
     }
     let like_num_id = `${web_list[i].kind}_${web_list[i].id}`;
+    let icon_str = web_list[i]?.icon;
+    let icon_star = icon_str?icon_str:'&#xe639;';
     if ($(window).width() >= 768) {
-        web_list_html += `<div id="${like_num_id}" class="col-md-4 web-grid web-grid-web ${web_list[i].kind} is_${web_list[i].star}"><mya href="${web_list[i].href}"><div data-toggle="popover" data-html="true" data-content="${web_list[i].slogan}<span class='iconfont ${localStorage.getItem(like_num_id)}'>&#xe603;</span><span class='like-num ${localStorage.getItem(like_num_id)}'>0</span>" class="services-inner-box web-single clearfix" ontouchstart=""><span class="${web_list[i].star} iconfont">&#xe639;</span><h2>${web_list[i].title}</h2><p><span class="web-kind">${web_list[i].kind_name}</span><span class="iconfont ${localStorage.getItem(like_num_id)}">&#xe603;</span><span class="like-num-sort like-num ${localStorage.getItem(like_num_id)}">0</span></p></div></mya></div>`;
+        web_list_html += `<div id="${like_num_id}" class="col-md-4 web-grid web-grid-web ${web_list[i].kind} is_${web_list[i].star}"><mya href="${web_list[i].href}"><div data-toggle="popover" data-html="true" data-content="${web_list[i].slogan}<span class='iconfont ${localStorage.getItem(like_num_id)}'>&#xe603;</span><span class='like-num ${localStorage.getItem(like_num_id)}'>0</span>" class="services-inner-box web-single clearfix" ontouchstart=""><span class="${web_list[i].star} iconfont">${icon_star}</span><h2>${web_list[i].title}</h2><p><span class="web-kind">${web_list[i].kind_name}</span><span class="iconfont ${localStorage.getItem(like_num_id)}">&#xe603;</span><span class="like-num-sort like-num ${localStorage.getItem(like_num_id)}">0</span></p></div></mya></div>`;
     } else {
-        web_list_html += `<div id="${like_num_id}" class="col-md-4 web-grid web-grid-phone ${web_list[i].kind} is_${web_list[i].star}"><span href="${web_list[i].href}"><div data-content="${web_list[i].slogan}" class="services-inner-box web-single clearfix" ontouchstart=""><span class="${web_list[i].star} iconfont">&#xe639;</span><h2>${web_list[i].title}</h2><p><span class="web-kind">${web_list[i].kind_name}</span><span class="iconfont ${localStorage.getItem(like_num_id)}">&#xe603;</span><span class="like-num-sort like-num ${localStorage.getItem(like_num_id)}">0</span></p></div></span></div>`;
+        web_list_html += `<div id="${like_num_id}" class="col-md-4 web-grid web-grid-phone ${web_list[i].kind} is_${web_list[i].star}"><span href="${web_list[i].href}"><div data-content="${web_list[i].slogan}" class="services-inner-box web-single clearfix" ontouchstart=""><span class="${web_list[i].star} iconfont">${icon_star}</span><h2>${web_list[i].title}</h2><p><span class="web-kind">${web_list[i].kind_name}</span><span class="iconfont ${localStorage.getItem(like_num_id)}">&#xe603;</span><span class="like-num-sort like-num ${localStorage.getItem(like_num_id)}">0</span></p></div></span></div>`;
     }
 }
 $('.web-list').html(web_list_html);
